@@ -18,6 +18,20 @@ NC='\033[0m' # No Color
 echo -e "${BLUE}Yaeger Benchmark - Task 2: Secure Microservice Authentication${NC}"
 echo "=============================================================="
 
+# Error handling function
+handle_error() {
+    echo -e "${RED}Error occurred in verification script${NC}"
+    echo "Line $1: $2"
+    # Kill server if running
+    if [ ! -z "$SERVER_PID" ]; then
+        kill $SERVER_PID 2>/dev/null || true
+    fi
+    echo "Score: 0"
+    exit 1
+}
+
+trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
+
 # Check if submission exists
 if [ ! -f "$TASK_DIR/submission.py" ]; then
     echo -e "${RED}Error: submission.py not found${NC}"
@@ -29,16 +43,37 @@ fi
 CORRECTNESS_SCORE=0
 PERFORMANCE_SCORE=0
 SECURITY_SCORE=0
+SERVER_PID=""
 
-# Setup virtual environment
-if [ ! -d "venv" ]; then
-    echo "Setting up Python virtual environment..."
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install fastapi uvicorn pytest pytest-asyncio httpx bcrypt pyjwt cryptography pyotp qrcode bandit > /dev/null 2>&1
-else
-    source venv/bin/activate
+# Setup virtual environment with error handling
+echo "Setting up Python environment..."
+if ! command -v python3 &> /dev/null; then
+    echo -e "${RED}Error: Python 3 not found${NC}"
+    echo "Score: 0"
+    exit 1
 fi
+
+if [ ! -d "venv" ]; then
+    echo "Creating Python virtual environment..."
+    if ! python3 -m venv venv; then
+        echo -e "${RED}Error: Failed to create virtual environment${NC}"
+        echo "Score: 0"
+        exit 1
+    fi
+fi
+
+source venv/bin/activate || {
+    echo -e "${RED}Error: Failed to activate virtual environment${NC}"
+    echo "Score: 0"
+    exit 1
+}
+
+echo "Installing dependencies..."
+pip install fastapi uvicorn pytest pytest-asyncio httpx bcrypt pyjwt cryptography pyotp qrcode bandit pydantic[email] > /dev/null 2>&1 || {
+    echo -e "${RED}Error: Failed to install dependencies${NC}"
+    echo "Score: 0"
+    exit 1
+}
 
 cd "$TASK_DIR"
 export PYTHONPATH="$TASK_DIR:$PYTHONPATH"
@@ -47,9 +82,27 @@ echo -e "\n${BLUE}=== CORRECTNESS TESTS (70%) ===${NC}"
 
 # Start the FastAPI server in background for testing
 echo "Starting authentication service..."
-python submission.py &
+timeout 600 python submission.py &
 SERVER_PID=$!
-sleep 5
+
+# Wait for server to start with timeout
+echo "Waiting for server to start..."
+WAIT_COUNT=0
+while [ $WAIT_COUNT -lt 30 ]; do
+    if curl -s http://localhost:8000/health > /dev/null 2>&1; then
+        echo -e "${GREEN}✓ Server started successfully${NC}"
+        break
+    fi
+    sleep 1
+    WAIT_COUNT=$((WAIT_COUNT + 1))
+done
+
+if [ $WAIT_COUNT -eq 30 ]; then
+    echo -e "${RED}Error: Server failed to start within 30 seconds${NC}"
+    kill $SERVER_PID 2>/dev/null || true
+    echo "Score: 0"
+    exit 1
+fi
 
 # Test basic endpoints
 echo "Testing authentication endpoints..."
@@ -206,9 +259,12 @@ wait
 echo -e "${GREEN}✓ Concurrent request handling working${NC}"
 PERFORMANCE_SCORE=$((PERFORMANCE_SCORE + 10))
 
-# Stop the server
-kill $SERVER_PID 2>/dev/null || true
-wait $SERVER_PID 2>/dev/null || true
+# Stop the server with proper cleanup
+echo "Stopping server..."
+if [ ! -z "$SERVER_PID" ]; then
+    kill $SERVER_PID 2>/dev/null || true
+    wait $SERVER_PID 2>/dev/null || true
+fi
 
 # Calculate final score
 TOTAL_SCORE=$((CORRECTNESS_SCORE + PERFORMANCE_SCORE + SECURITY_SCORE))
@@ -228,9 +284,16 @@ echo "Security Score: $SECURITY_SCORE/10"
 echo "========================================"
 echo "Score: $TOTAL_SCORE"
 
+# Performance feedback
+if (( $(echo "${AVG_RESPONSE_TIME:-0} > 100" | bc -l 2>/dev/null || echo "0") )); then
+    echo -e "${RED}Warning: Average response time exceeds 100ms${NC}"
+fi
+
 # Clean up
 rm -f /tmp/*_response.json bandit_output.tmp
-deactivate
+
+# Deactivate virtual environment
+deactivate 2>/dev/null || true
 
 # Exit with success if score > 70
 if [ $TOTAL_SCORE -ge 70 ]; then

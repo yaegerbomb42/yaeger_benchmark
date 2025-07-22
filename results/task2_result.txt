@@ -1,56 +1,1622 @@
 [0;34mYaeger Benchmark - Task 2: Secure Microservice Authentication[0m
 ==============================================================
-Setting up Python virtual environment...
+Setting up Python environment...
+Installing dependencies...
 
 [0;34m=== CORRECTNESS TESTS (70%) ===[0m
 Starting authentication service...
-Traceback (most recent call last):
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/networks.py", line 946, in import_email_validator
-    import email_validator
-ModuleNotFoundError: No module named 'email_validator'
+Waiting for server to start...
+/workspaces/yaeger_benchmark/tasks/task2/submission.py:392: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
 
-The above exception was the direct cause of the following exception:
-
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [57631]
+INFO:     Waiting for application startup.
+INFO:     ASGI 'lifespan' protocol appears unsupported.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+ERROR:    Exception in ASGI application
 Traceback (most recent call last):
-  File "/workspaces/yaeger_benchmark/tasks/task2/submission.py", line 27, in <module>
-    from codebase.models import (
-  File "/workspaces/yaeger_benchmark/tasks/task2/codebase/models.py", line 23, in <module>
-    class RegisterRequest(BaseModel):
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_model_construction.py", line 237, in __new__
-    complete_model_class(
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_model_construction.py", line 597, in complete_model_class
-    schema = gen_schema.generate_schema(cls)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 711, in generate_schema
-    schema = self._generate_schema_inner(obj)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 1004, in _generate_schema_inner
-    return self._model_schema(obj)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 837, in _model_schema
-    {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 1206, in _generate_md_field_schema
-    common_field = self._common_field_schema(name, field_info, decorators)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 1372, in _common_field_schema
-    schema = self._apply_annotations(
-             ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 2297, in _apply_annotations
-    schema = get_inner_schema(source_type)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_schema_generation_shared.py", line 83, in __call__
-    schema = self._handler(source_type)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 2276, in inner_handler
-    schema = self._generate_schema_from_get_schema_method(obj, source_type)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 900, in _generate_schema_from_get_schema_method
-    schema = get_schema(
-             ^^^^^^^^^^^
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/networks.py", line 986, in __get_pydantic_core_schema__
-    import_email_validator()
-  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/networks.py", line 948, in import_email_validator
-    raise ImportError('email-validator is not installed, run `pip install pydantic[email]`') from e
-ImportError: email-validator is not installed, run `pip install pydantic[email]`
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43742 - "GET /health HTTP/1.1" 500 Internal Server Error
+[0;32m✓ Server started successfully[0m
 Testing authentication endpoints...
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43752 - "POST /auth/register HTTP/1.1" 500 Internal Server Error
+[0;31m✗ Registration endpoint failed (HTTP 500)[0m
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43754 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+[0;31m✗ Login endpoint failed (HTTP 500)[0m
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43758 - "GET /health HTTP/1.1" 500 Internal Server Error
+[0;31m✗ Health endpoint failed[0m
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43774 - "GET /oauth/authorize?client_id=demo_client&response_type=code&redirect_uri=http://localhost:8000/callback HTTP/1.1" 500 Internal Server Error
+[0;31m✗ OAuth2 authorize endpoint failed[0m
+
+[0;34m=== SECURITY TESTS (10%) ===[0m
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43782 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+[0;31m✗ SQL injection protection failed[0m
+Testing rate limiting...
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43796 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43806 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43822 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43834 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43842 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43858 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43868 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43880 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43882 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43892 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43894 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43900 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43914 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43920 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43930 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43938 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43954 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43960 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43966 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43982 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+[0;31m✗ Rate limiting not working[0m
+Running security analysis...
+[0;32m✓ Security scan passed (1 issues)[0m
+
+[0;34m=== PERFORMANCE TESTS (20%) ===[0m
+Testing response times...
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43992 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:43994 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44008 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44010 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44020 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44024 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44028 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44030 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44032 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44034 - "GET /health HTTP/1.1" 500 Internal Server Error
+[0;32m✓ Response time acceptable (0ms avg)[0m
+Testing concurrent request handling...
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44038 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44052 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44064 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44068 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44084 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44100 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44114 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44116 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44128 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44142 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44152 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44168 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44180 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44194 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44198 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44202 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44206 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44218 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44224 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44236 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44238 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44242 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44252 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44260 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44276 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44282 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44298 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44304 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44318 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44334 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44350 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44356 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44358 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44372 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44376 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44390 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44394 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44396 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44404 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44414 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44420 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44426 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44438 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44440 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44454 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44462 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44474 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44482 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44490 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     127.0.0.1:44494 - "GET /health HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     73.74.38.11:0 - "GET / HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    self.middleware_stack = self.build_middleware_stack()
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/starlette/applications.py", line 99, in build_middleware_stack
+    app = cls(app, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
+INFO:     73.74.38.11:0 - "GET /favicon.ico HTTP/1.1" 500 Internal Server Error

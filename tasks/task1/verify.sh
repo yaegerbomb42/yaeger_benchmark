@@ -9,12 +9,354 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TASK_DIR="$SCRIPT_DIR"
 TEST_DIR="$TASK_DIR/tests"
 
+#!/bin/bash
+
+# Task 1 Verification Script
+# Tests the Real-Time Trading Optimizer implementation
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TASK_DIR="$SCRIPT_DIR"
+TEST_DIR="$TASK_DIR/tests"
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
+
+echo -e "${BLUE}Yaeger Benchmark - Task 1: Real-Time Trading Optimizer${NC}"
+echo "======================================================="
+
+# Error handling function
+handle_error() {
+    echo -e "${RED}Error occurred in verification script${NC}"
+    echo "Line $1: $2"
+    echo "Score: 0"
+    exit 1
+}
+
+trap 'handle_error $LINENO "$BASH_COMMAND"' ERR
+
+# Check if submission exists
+if [ ! -f "$TASK_DIR/submission.py" ]; then
+    echo -e "${RED}Error: submission.py not found${NC}"
+    echo "Score: 0"
+    exit 1
+fi
+
+# Initialize scores
+CORRECTNESS_SCORE=0
+PERFORMANCE_SCORE=0
+SECURITY_SCORE=0
+TOTAL_TESTS=0
+PASSED_TESTS=0
+
+# Function to run tests and capture results
+run_test_suite() {
+    local test_file=$1
+    local test_name=$2
+    local max_score=$3
+    
+    echo -e "\n${YELLOW}Running $test_name...${NC}"
+    
+    # Check if test file exists
+    if [ ! -f "$test_file" ]; then
+        echo -e "${RED}$test_name: Test file not found${NC}"
+        return 0
+    fi
+    
+    # Run tests with timeout and error handling
+    if timeout 300 python -m pytest "$test_file" -v --tb=short > test_output.tmp 2>&1; then
+        local passed=$(grep -c "PASSED" test_output.tmp 2>/dev/null || echo "0")
+        local failed=$(grep -c "FAILED" test_output.tmp 2>/dev/null || echo "0")
+        local total=$((passed + failed))
+        
+        if [ $total -gt 0 ]; then
+            local score=$((passed * max_score / total))
+            echo -e "${GREEN}$test_name: $passed/$total tests passed (Score: $score/$max_score)${NC}"
+            
+            TOTAL_TESTS=$((TOTAL_TESTS + total))
+            PASSED_TESTS=$((PASSED_TESTS + passed))
+            
+            return $score
+        else
+            echo -e "${YELLOW}$test_name: No test results found${NC}"
+            return 0
+        fi
+    else
+        local exit_code=$?
+        echo -e "${RED}$test_name: Test suite failed (exit code: $exit_code)${NC}"
+        if [ -f test_output.tmp ]; then
+            echo "Error details:"
+            tail -n 10 test_output.tmp
+        fi
+        return 0
+    fi
+}
+
+# Change to task directory
+cd "$TASK_DIR"
+
+# Setup Python environment with error handling
+echo "Setting up Python environment..."
+if ! command -v python3 &> /dev/null; then
+    echo -e "${RED}Error: Python 3 not found${NC}"
+    echo "Score: 0"
+    exit 1
+fi
+
+# Install dependencies if needed
+if [ ! -d "venv" ]; then
+    echo "Creating Python virtual environment..."
+    if ! python3 -m venv venv; then
+        echo -e "${RED}Error: Failed to create virtual environment${NC}"
+        echo "Score: 0"
+        exit 1
+    fi
+fi
+
+source venv/bin/activate || {
+    echo -e "${RED}Error: Failed to activate virtual environment${NC}"
+    echo "Score: 0"
+    exit 1
+}
+
+# Install required packages
+echo "Installing dependencies..."
+pip install pytest pytest-timeout psutil > /dev/null 2>&1 || {
+    echo -e "${RED}Error: Failed to install dependencies${NC}"
+    echo "Score: 0"
+    exit 1
+}
+
+# Add current directory to Python path
+export PYTHONPATH="$TASK_DIR:$PYTHONPATH"
+
+# Run correctness tests (70% of score)
+echo -e "\n${BLUE}=== CORRECTNESS TESTS (70%) ===${NC}"
+
+# Check if test directory exists and create basic tests if missing
+if [ ! -d "$TEST_DIR" ]; then
+    echo -e "${YELLOW}Creating basic test suite...${NC}"
+    mkdir -p "$TEST_DIR"
+    
+    # Create a basic functionality test
+    cat > "$TEST_DIR/test_basic.py" << 'EOF'
+import pytest
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+def test_submission_imports():
+    """Test that submission.py can be imported."""
+    try:
+        import submission
+        assert hasattr(submission, 'trading_algorithm'), "trading_algorithm function not found"
+    except Exception as e:
+        pytest.fail(f"Failed to import submission: {e}")
+
+def test_basic_functionality():
+    """Test basic functionality exists."""
+    import submission
+    from codebase.exchange import Exchange
+    from codebase.market_data import MarketData
+    from codebase.portfolio import Portfolio
+    
+    # Create test instances
+    exchange = Exchange()
+    market_data = MarketData(['AAPL'])
+    portfolio = Portfolio()
+    
+    # Test that function can be called without crashing
+    try:
+        submission.trading_algorithm(exchange, market_data, portfolio)
+    except Exception as e:
+        # Allow NotImplementedError or pass statements
+        if "not implemented" not in str(e).lower() and "pass" not in str(e).lower():
+            pytest.fail(f"trading_algorithm crashed: {e}")
+EOF
+fi
+
+# Run tests with proper error handling
+if [ -f "$TEST_DIR/test_trading.py" ]; then
+    run_test_suite "$TEST_DIR/test_trading.py" "Core Trading Tests" 50
+    CORRECTNESS_SCORE=$((CORRECTNESS_SCORE + $?))
+fi
+
+if [ -f "$TEST_DIR/test_basic.py" ]; then
+    run_test_suite "$TEST_DIR/test_basic.py" "Basic Functionality Tests" 20
+    CORRECTNESS_SCORE=$((CORRECTNESS_SCORE + $?))
+fi
+
+# Run performance tests (20% of score)
+echo -e "\n${BLUE}=== PERFORMANCE TESTS (20%) ===${NC}"
+
+if [ -f "$TEST_DIR/test_performance.py" ]; then
+    run_test_suite "$TEST_DIR/test_performance.py" "Performance Tests" 20
+    PERFORMANCE_SCORE=$?
+else
+    echo "Running basic performance test..."
+    python3 -c "
+import sys
+import time
+sys.path.append('$TASK_DIR')
+try:
+    from codebase.exchange import Exchange
+    from codebase.market_data import MarketData
+    from codebase.portfolio import Portfolio
+    from submission import trading_algorithm
+    
+    exchange = Exchange()
+    market_data = MarketData(['AAPL'])
+    portfolio = Portfolio()
+    
+    start = time.time()
+    for _ in range(5):
+        trading_algorithm(exchange, market_data, portfolio)
+    end = time.time()
+    
+    avg_time = (end - start) / 5 * 1000
+    print(f'Average execution time: {avg_time:.2f}ms')
+    
+    if avg_time < 100:
+        print('PERFORMANCE: PASS')
+        exit(0)
+    else:
+        print('PERFORMANCE: FAIL - Too slow')
+        exit(1)
+except Exception as e:
+    print(f'PERFORMANCE: FAIL - {e}')
+    exit(1)
+" > perf_output.tmp 2>&1
+
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}✓ Performance test passed${NC}"
+        PERFORMANCE_SCORE=10
+    else
+        echo -e "${RED}✗ Performance test failed${NC}"
+        cat perf_output.tmp
+        PERFORMANCE_SCORE=0
+    fi
+fi
+
+# Run security tests (10% of score)
+echo -e "\n${BLUE}=== SECURITY TESTS (10%) ===${NC}"
+
+# Basic security checks
+SECURITY_ISSUES=0
+
+# Check for dangerous imports or code patterns
+if grep -q "eval\|exec\|import os\|import subprocess" "$TASK_DIR/submission.py" 2>/dev/null; then
+    echo -e "${RED}Security issue: Potentially dangerous code detected${NC}"
+    SECURITY_ISSUES=$((SECURITY_ISSUES + 1))
+fi
+
+# Check for infinite loops
+if grep -q "while True:" "$TASK_DIR/submission.py" 2>/dev/null; then
+    echo -e "${YELLOW}Warning: Infinite loop detected${NC}"
+fi
+
+# Calculate security score
+if [ $SECURITY_ISSUES -eq 0 ]; then
+    SECURITY_SCORE=10
+    echo -e "${GREEN}✓ Security: No issues found${NC}"
+elif [ $SECURITY_ISSUES -lt 3 ]; then
+    SECURITY_SCORE=5
+    echo -e "${YELLOW}Security: Minor issues found${NC}"
+else
+    SECURITY_SCORE=0
+    echo -e "${RED}Security: Major issues found${NC}"
+fi
+
+# Measure runtime performance
+echo -e "\n${BLUE}=== RUNTIME MEASUREMENT ===${NC}"
+
+RUNTIME="0"
+MEMORY="0"
+
+python3 -c "
+import sys
+import time
+import psutil
+import os
+sys.path.append('$TASK_DIR')
+
+try:
+    from codebase.exchange import Exchange
+    from codebase.market_data import MarketData
+    from codebase.portfolio import Portfolio
+    from submission import trading_algorithm
+    
+    process = psutil.Process(os.getpid())
+    initial_memory = process.memory_info().rss / 1024 / 1024
+    
+    exchange = Exchange()
+    market_data = MarketData(['AAPL'])
+    portfolio = Portfolio()
+    
+    start = time.time()
+    trading_algorithm(exchange, market_data, portfolio)
+    end = time.time()
+    
+    final_memory = process.memory_info().rss / 1024 / 1024
+    runtime = (end - start) * 1000
+    
+    print(f'Runtime: {runtime:.1f}ms')
+    print(f'Memory: {final_memory:.1f}MB')
+    
+except Exception as e:
+    print(f'Runtime: 999ms')
+    print(f'Memory: 999MB')
+    print(f'Error: {e}')
+" > runtime_output.tmp 2>&1
+
+# Extract metrics
+RUNTIME=$(grep "Runtime:" runtime_output.tmp | awk '{print $2}' | sed 's/ms//' 2>/dev/null || echo "999")
+MEMORY=$(grep "Memory:" runtime_output.tmp | awk '{print $2}' | sed 's/MB//' 2>/dev/null || echo "999")
+
+# Calculate final score
+TOTAL_SCORE=$((CORRECTNESS_SCORE + PERFORMANCE_SCORE + SECURITY_SCORE))
+
+# Generate summary
+echo -e "\n${BLUE}=== RESULTS SUMMARY ===${NC}"
+echo "========================================"
+echo "Tests: $PASSED_TESTS/$TOTAL_TESTS passed"
+echo "Runtime: ${RUNTIME}ms"
+echo "Memory: ${MEMORY}MB"
+echo "Vulns: $SECURITY_ISSUES"
+echo ""
+echo "Correctness Score: $CORRECTNESS_SCORE/70"
+echo "Performance Score: $PERFORMANCE_SCORE/20"
+echo "Security Score: $SECURITY_SCORE/10"
+echo "========================================"
+echo "Score: $TOTAL_SCORE"
+
+# Performance feedback
+if (( $(echo "$RUNTIME > 100" | bc -l 2>/dev/null || echo "0") )); then
+    echo -e "${RED}Warning: Runtime exceeds 100ms limit${NC}"
+fi
+
+if (( $(echo "$MEMORY > 512" | bc -l 2>/dev/null || echo "0") )); then
+    echo -e "${RED}Warning: Memory usage exceeds 512MB limit${NC}"
+fi
+
+# Clean up
+rm -f test_output.tmp runtime_output.tmp perf_output.tmp
+
+# Deactivate virtual environment
+deactivate 2>/dev/null || true
+
+# Exit with appropriate code
+if [ $TOTAL_SCORE -ge 70 ]; then
+    echo -e "\n${GREEN}✓ Task 1 verification passed!${NC}"
+    exit 0
+else
+    echo -e "\n${RED}✗ Task 1 verification failed (score: $TOTAL_SCORE/100)${NC}"
+    exit 1
+fi
 
 echo -e "${BLUE}Yaeger Benchmark - Task 1: Real-Time Trading Optimizer${NC}"
 echo "======================================================="
