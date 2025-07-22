@@ -1,0 +1,102 @@
+[0;34mYaeger Benchmark - Task 1: Real-Time Trading Optimizer[0m
+=======================================================
+Setting up Python virtual environment...
+
+[0;34m=== CORRECTNESS TESTS (70%) ===[0m
+
+[1;33mRunning Core Trading Tests...[0m
+[0;31mCore Trading Tests: Test suite failed to run[0m
+============================= test session starts ==============================
+platform linux -- Python 3.12.1, pytest-8.4.1, pluggy-1.6.0 -- /workspaces/yaeger_benchmark/tasks/task1/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /workspaces/yaeger_benchmark/tasks/task1
+plugins: timeout-2.4.0
+timeout: 300.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 13 items
+
+tests/test_trading.py::TestTradingAlgorithm::test_algorithm_basic_functionality PASSED [  7%]
+tests/test_trading.py::TestTradingAlgorithm::test_algorithm_handles_market_updates PASSED [ 15%]
+tests/test_trading.py::TestTradingAlgorithm::test_risk_management FAILED [ 23%]
+tests/test_trading.py::TestTradingAlgorithm::test_position_limits PASSED [ 30%]
+tests/test_trading.py::TestTradingAlgorithm::test_cash_management PASSED [ 38%]
+tests/test_trading.py::TestTradingAlgorithm::test_order_execution PASSED [ 46%]
+tests/test_trading.py::TestTradingAlgorithm::test_quote_retrieval PASSED [ 53%]
+tests/test_trading.py::TestTradingAlgorithm::test_portfolio_tracking PASSED [ 61%]
+tests/test_trading.py::TestTradingAlgorithm::test_performance_under_load PASSED [ 69%]
+tests/test_trading.py::TestTradingAlgorithm::test_error_handling PASSED  [ 76%]
+tests/test_trading.py::TestTradingAlgorithm::test_market_volatility_handling PASSED [ 84%]
+tests/test_trading.py::TestTradingAlgorithm::test_memory_usage PASSED    [ 92%]
+tests/test_trading.py::TestTradingAlgorithm::test_profitability_simulation PASSED [100%]
+
+=================================== FAILURES ===================================
+__________________ TestTradingAlgorithm.test_risk_management ___________________
+tests/test_trading.py:80: in test_risk_management
+    assert len(violations) > 0, "Risk management should detect loss limit violation"
+E   AssertionError: Risk management should detect loss limit violation
+E   assert 0 > 0
+E    +  where 0 = len([])
+=========================== short test summary info ============================
+FAILED tests/test_trading.py::TestTradingAlgorithm::test_risk_management - As...
+======================== 1 failed, 12 passed in 20.28s =========================
+
+[0;34m=== PERFORMANCE TESTS (20%) ===[0m
+
+[1;33mRunning Performance Tests...[0m
+[0;31mPerformance Tests: Test suite failed to run[0m
+============================= test session starts ==============================
+platform linux -- Python 3.12.1, pytest-8.4.1, pluggy-1.6.0 -- /workspaces/yaeger_benchmark/tasks/task1/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /workspaces/yaeger_benchmark/tasks/task1
+plugins: timeout-2.4.0
+timeout: 300.0s
+timeout method: signal
+timeout func_only: False
+collecting ... collected 5 items
+
+tests/test_performance.py::TestPerformance::test_sustained_high_frequency PASSED [ 20%]
+tests/test_performance.py::TestPerformance::test_concurrent_market_updates FAILED [ 40%]
+tests/test_performance.py::TestPerformance::test_memory_stability PASSED [ 60%]
+tests/test_performance.py::TestPerformance::test_order_throughput PASSED [ 80%]
+tests/test_performance.py::TestPerformance::test_market_stress_conditions PASSED [100%]
+
+=================================== FAILURES ===================================
+________________ TestPerformance.test_concurrent_market_updates ________________
+tests/test_performance.py:108: in test_concurrent_market_updates
+    assert update_count > 500, f"Should process many updates, got {update_count}"
+E   AssertionError: Should process many updates, got 475
+E   assert 475 > 500
+----------------------------- Captured stdout call -----------------------------
+Processed 475 market updates
+Average callback time: 15.27ms
+Max callback time: 22.82ms
+=========================== short test summary info ============================
+FAILED tests/test_performance.py::TestPerformance::test_concurrent_market_updates
+=================== 1 failed, 4 passed in 159.66s (0:02:39) ====================
+
+[0;34m=== SECURITY TESTS (10%) ===[0m
+[0;31mSecurity issue: Found eval/exec usage[0m
+Running security analysis with bandit...
+./verify.sh: line 125: [: too many arguments
+./verify.sh: line 128: [: too many arguments
+[0;31mSecurity: Major issues found (Score: 0/10)[0m
+
+[0;34m=== RUNTIME MEASUREMENT ===[0m
+Measuring memory usage...
+
+[0;34m=== RESULTS SUMMARY ===[0m
+========================================
+Tests: 0/0 passed
+Runtime: 15.87ms
+Memory: 15.8MB
+Vulns: 0
+0
+
+Correctness Score: 0/70
+Performance Score: 0/20
+Security Score: 0/10
+========================================
+Score: 0
+
+[0;31m✗ Task 1 verification failed (score: 0/100)[0m

@@ -1,0 +1,8 @@
+Yaeger Benchmark - Task 9: Secure File Storage System
+===================================================
+Testing file storage implementation...
+Tests: 47/100 passed
+Runtime: 150ms
+Memory: 900MB
+Vulns: 1
+Score: 47

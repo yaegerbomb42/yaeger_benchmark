@@ -1,0 +1,132 @@
+name: Yaeger Benchmark Verification
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  verify-submission:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y bc curl jq
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Determine task from PR title
+      id: task-info
+      run: |
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          TASK_ID="${{ github.event.pull_request.title }}"
+        else
+          # For push events, run all tasks
+          TASK_ID="all"
+        fi
+        echo "task_id=$TASK_ID" >> $GITHUB_OUTPUT
+    
+    - name: Run specific task verification
+      if: startsWith(steps.task-info.outputs.task_id, 'task')
+      run: |
+        TASK_ID="${{ steps.task-info.outputs.task_id }}"
+        if [ -d "tasks/$TASK_ID" ] && [ -f "tasks/$TASK_ID/verify.sh" ]; then
+          chmod +x "tasks/$TASK_ID/verify.sh"
+          cd "tasks/$TASK_ID"
+          ./verify.sh
+        else
+          echo "Task $TASK_ID not found or no verification script"
+          exit 1
+        fi
+    
+    - name: Run all task verifications
+      if: steps.task-info.outputs.task_id == 'all'
+      run: |
+        chmod +x verify/verify_all.sh
+        ./verify/verify_all.sh
+    
+    - name: Extract verification results
+      if: always()
+      id: results
+      run: |
+        if [ "${{ steps.task-info.outputs.task_id }}" = "all" ]; then
+          if [ -f "results/verification_summary.txt" ]; then
+            SUMMARY=$(cat results/verification_summary.txt | tail -n 20)
+          else
+            SUMMARY="Verification summary not found"
+          fi
+        else
+          TASK_ID="${{ steps.task-info.outputs.task_id }}"
+          if [ -f "results/${TASK_ID}_result.txt" ]; then
+            SUMMARY=$(cat "results/${TASK_ID}_result.txt")
+          else
+            SUMMARY="Task result not found"
+          fi
+        fi
+        echo "summary<<EOF" >> $GITHUB_OUTPUT
+        echo "$SUMMARY" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+    
+    - name: Comment PR with results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const summary = `${{ steps.results.outputs.summary }}`;
+          const taskId = `${{ steps.task-info.outputs.task_id }}`;
+          
+          const comment = `## Yaeger Benchmark Results
+          
+          **Task:** ${taskId}
+          
+          \`\`\`
+          ${summary}
+          \`\`\`
+          
+          ---
+          *Automated verification completed at ${new Date().toISOString()}*
+          `;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
+    
+    - name: Upload verification artifacts
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: verification-results
+        path: |
+          results/
+          tasks/*/result*.txt
+          tasks/*/test_output.tmp
+        retention-days: 30
+    
+    - name: Update leaderboard
+      if: github.event_name == 'pull_request' && success()
+      run: |
+        # Extract score from verification results
+        TASK_ID="${{ steps.task-info.outputs.task_id }}"
+        if [ -f "results/${TASK_ID}_result.txt" ]; then
+          SCORE=$(grep "Score:" "results/${TASK_ID}_result.txt" | tail -1 | awk '{print $2}')
+          if [ -n "$SCORE" ]; then
+            # Update leaderboard (this would integrate with the API in production)
+            echo "Score for $TASK_ID: $SCORE"
+          fi
+        fi

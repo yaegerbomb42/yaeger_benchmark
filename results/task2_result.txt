@@ -1,0 +1,56 @@
+[0;34mYaeger Benchmark - Task 2: Secure Microservice Authentication[0m
+==============================================================
+Setting up Python virtual environment...
+
+[0;34m=== CORRECTNESS TESTS (70%) ===[0m
+Starting authentication service...
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/networks.py", line 946, in import_email_validator
+    import email_validator
+ModuleNotFoundError: No module named 'email_validator'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspaces/yaeger_benchmark/tasks/task2/submission.py", line 27, in <module>
+    from codebase.models import (
+  File "/workspaces/yaeger_benchmark/tasks/task2/codebase/models.py", line 23, in <module>
+    class RegisterRequest(BaseModel):
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_model_construction.py", line 237, in __new__
+    complete_model_class(
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_model_construction.py", line 597, in complete_model_class
+    schema = gen_schema.generate_schema(cls)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 711, in generate_schema
+    schema = self._generate_schema_inner(obj)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 1004, in _generate_schema_inner
+    return self._model_schema(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 837, in _model_schema
+    {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 1206, in _generate_md_field_schema
+    common_field = self._common_field_schema(name, field_info, decorators)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 1372, in _common_field_schema
+    schema = self._apply_annotations(
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 2297, in _apply_annotations
+    schema = get_inner_schema(source_type)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_schema_generation_shared.py", line 83, in __call__
+    schema = self._handler(source_type)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 2276, in inner_handler
+    schema = self._generate_schema_from_get_schema_method(obj, source_type)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/_internal/_generate_schema.py", line 900, in _generate_schema_from_get_schema_method
+    schema = get_schema(
+             ^^^^^^^^^^^
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/networks.py", line 986, in __get_pydantic_core_schema__
+    import_email_validator()
+  File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/pydantic/networks.py", line 948, in import_email_validator
+    raise ImportError('email-validator is not installed, run `pip install pydantic[email]`') from e
+ImportError: email-validator is not installed, run `pip install pydantic[email]`
+Testing authentication endpoints...

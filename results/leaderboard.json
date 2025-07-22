@@ -1,0 +1,16 @@
+[
+  {
+    "model": "Human Expert Baseline",
+    "task1": 95,
+    "task2": 92,
+    "task3": 88,
+    "task4": 90,
+    "task5": 85,
+    "task6": 87,
+    "task7": 89,
+    "task8": 91,
+    "task9": 86,
+    "task10": 93,
+    "total": 896
+  }
+]

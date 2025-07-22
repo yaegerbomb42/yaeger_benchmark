@@ -1,0 +1,8 @@
+Yaeger Benchmark - Task 6: Blockchain Transaction Validator
+=========================================================
+Testing blockchain implementation...
+Tests: 38/100 passed
+Runtime: 8500ms
+Memory: 2100MB
+Vulns: 0
+Score: 38
