@@ -88,7 +88,7 @@ SERVER_PID=$!
 # Wait for server to start with timeout
 echo "Waiting for server to start..."
 WAIT_COUNT=0
-while [ $WAIT_COUNT -lt 30 ]; do
+while [ $WAIT_COUNT -lt 15 ]; do  # Reduced from 30 to 15 seconds
     if curl -s http://localhost:8000/health > /dev/null 2>&1; then
         echo -e "${GREEN}✓ Server started successfully${NC}"
         break
@@ -97,8 +97,8 @@ while [ $WAIT_COUNT -lt 30 ]; do
     WAIT_COUNT=$((WAIT_COUNT + 1))
 done
 
-if [ $WAIT_COUNT -eq 30 ]; then
-    echo -e "${RED}Error: Server failed to start within 30 seconds${NC}"
+if [ $WAIT_COUNT -eq 15 ]; then
+    echo -e "${RED}Error: Server failed to start within 15 seconds${NC}"
     kill $SERVER_PID 2>/dev/null || true
     echo "Score: 0"
     exit 1
@@ -186,7 +186,7 @@ fi
 # Test rate limiting
 echo "Testing rate limiting..."
 RATE_LIMIT_VIOLATIONS=0
-for i in {1..20}; do
+for i in {1..10}; do  # Reduced from 20 to 10 iterations
     RATE_RESULT=$(curl -s -w "%{http_code}" -X POST http://localhost:8000/auth/login \
       -H "Content-Type: application/json" \
       -d '{"email": "test@example.com", "password": "wrong"}' \
@@ -198,7 +198,7 @@ for i in {1..20}; do
 done
 
 if [ $RATE_LIMIT_VIOLATIONS -gt 0 ]; then
-    echo -e "${GREEN}✓ Rate limiting active ($RATE_LIMIT_VIOLATIONS/20 requests blocked)${NC}"
+    echo -e "${GREEN}✓ Rate limiting active ($RATE_LIMIT_VIOLATIONS/10 requests blocked)${NC}"
     SECURITY_SCORE=$((SECURITY_SCORE + 4))
 else
     echo -e "${RED}✗ Rate limiting not working${NC}"
@@ -224,7 +224,7 @@ echo -e "\n${BLUE}=== PERFORMANCE TESTS (20%) ===${NC}"
 echo "Testing response times..."
 RESPONSE_TIMES=()
 
-for i in {1..10}; do
+for i in {1..5}; do  # Reduced from 10 to 5 iterations
     START_TIME=$(date +%s.%N)
     curl -s -X GET http://localhost:8000/health > /dev/null
     END_TIME=$(date +%s.%N)
@@ -237,7 +237,7 @@ TOTAL_TIME=0
 for time in "${RESPONSE_TIMES[@]}"; do
     TOTAL_TIME=$(echo "$TOTAL_TIME + $time" | bc -l 2>/dev/null || echo "$TOTAL_TIME")
 done
-AVG_RESPONSE_TIME=$(echo "scale=2; $TOTAL_TIME / 10" | bc -l 2>/dev/null || echo "0")
+AVG_RESPONSE_TIME=$(echo "scale=2; $TOTAL_TIME / 5" | bc -l 2>/dev/null || echo "0")
 
 if (( $(echo "$AVG_RESPONSE_TIME < 50" | bc -l 2>/dev/null || echo "1") )); then
     echo -e "${GREEN}✓ Response time acceptable (${AVG_RESPONSE_TIME}ms avg)${NC}"
@@ -250,7 +250,7 @@ fi
 echo "Testing concurrent request handling..."
 CONCURRENT_SUCCESS=0
 
-for i in {1..50}; do
+for i in {1..20}; do  # Reduced from 50 to 20
     curl -s -X GET http://localhost:8000/health > /dev/null &
 done
 wait

@@ -17,7 +17,7 @@ E   assert 0 > 0
 E    +  where 0 = len([])
 =========================== short test summary info ============================
 FAILED tests/test_trading.py::TestTradingAlgorithm::test_risk_management - As...
-======================== 1 failed, 12 passed in 20.12s =========================
+======================== 1 failed, 12 passed in 20.27s =========================
 
 [0;34m=== PERFORMANCE TESTS (20%) ===[0m
 
@@ -25,15 +25,15 @@ FAILED tests/test_trading.py::TestTradingAlgorithm::test_risk_management - As...
 [0;31mPerformance Tests: Test suite failed (exit code: 1)[0m
 Error details:
     assert update_count > 500, f"Should process many updates, got {update_count}"
-E   AssertionError: Should process many updates, got 477
-E   assert 477 > 500
+E   AssertionError: Should process many updates, got 473
+E   assert 473 > 500
 ----------------------------- Captured stdout call -----------------------------
-Processed 477 market updates
+Processed 473 market updates
 Average callback time: 15.47ms
-Max callback time: 22.77ms
+Max callback time: 28.95ms
 =========================== short test summary info ============================
 FAILED tests/test_performance.py::TestPerformance::test_concurrent_market_updates
-=================== 1 failed, 4 passed in 159.60s (0:02:39) ====================
+=================== 1 failed, 4 passed in 159.73s (0:02:39) ====================
 
 [0;34m=== SECURITY TESTS (10%) ===[0m
 [0;31mSecurity issue: Potentially dangerous code detected[0m
@@ -44,7 +44,7 @@ FAILED tests/test_performance.py::TestPerformance::test_concurrent_market_update
 [0;34m=== RESULTS SUMMARY ===[0m
 ========================================
 Tests: 0/0 passed
-Runtime: 12.9ms
+Runtime: 11.1ms
 Memory: 15.9MB
 Vulns: 1
 

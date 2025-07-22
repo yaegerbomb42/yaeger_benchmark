@@ -1,0 +1,26 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.1, pytest-8.4.1, pluggy-1.6.0 -- /workspaces/yaeger_benchmark/tasks/task1/venv/bin/python
+cachedir: .pytest_cache
+rootdir: /workspaces/yaeger_benchmark/tasks/task1
+plugins: timeout-2.4.0
+collecting ... collected 5 items
+
+tests/test_performance.py::TestPerformance::test_sustained_high_frequency PASSED [ 20%]
+tests/test_performance.py::TestPerformance::test_concurrent_market_updates FAILED [ 40%]
+tests/test_performance.py::TestPerformance::test_memory_stability PASSED [ 60%]
+tests/test_performance.py::TestPerformance::test_order_throughput PASSED [ 80%]
+tests/test_performance.py::TestPerformance::test_market_stress_conditions PASSED [100%]
+
+=================================== FAILURES ===================================
+________________ TestPerformance.test_concurrent_market_updates ________________
+tests/test_performance.py:108: in test_concurrent_market_updates
+    assert update_count > 500, f"Should process many updates, got {update_count}"
+E   AssertionError: Should process many updates, got 480
+E   assert 480 > 500
+----------------------------- Captured stdout call -----------------------------
+Processed 480 market updates
+Average callback time: 15.34ms
+Max callback time: 24.86ms
+=========================== short test summary info ============================
+FAILED tests/test_performance.py::TestPerformance::test_concurrent_market_updates
+=================== 1 failed, 4 passed in 159.43s (0:02:39) ====================

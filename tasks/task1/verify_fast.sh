@@ -121,11 +121,8 @@ except:
     print('999')
 " 2>/dev/null)
 
-# Convert to integer for comparison (remove decimal)
-RUNTIME_INT=${RUNTIME%.*}
-
-if [ "$RUNTIME_INT" -lt 100 ]; then
-    echo -e "${GREEN}✓ Performance excellent (${RUNTIME}ms)${NC}"
+if (( $(echo "$RUNTIME < 100" | bc -l 2>/dev/null || echo "0") )); then
+    echo -e "${GREEN}✓ Performance acceptable (${RUNTIME}ms)${NC}"
     PERFORMANCE_SCORE=20
 else
     echo -e "${YELLOW}⚠ Performance could be better (${RUNTIME}ms)${NC}"

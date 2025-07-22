@@ -13,7 +13,7 @@ Waiting for server to start...
         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
         
   @app.on_event("startup")
-INFO:     Started server process [57631]
+INFO:     Started server process [5424]
 INFO:     Waiting for application startup.
 INFO:     ASGI 'lifespan' protocol appears unsupported.
 INFO:     Application startup complete.
@@ -35,7 +35,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43742 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55480 - "GET /health HTTP/1.1" 500 Internal Server Error
 [0;32m✓ Server started successfully[0m
 Testing authentication endpoints...
 ERROR:    Exception in ASGI application
@@ -55,7 +55,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43752 - "POST /auth/register HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55484 - "POST /auth/register HTTP/1.1" 500 Internal Server Error
 [0;31m✗ Registration endpoint failed (HTTP 500)[0m
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
@@ -74,7 +74,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43754 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55490 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 [0;31m✗ Login endpoint failed (HTTP 500)[0m
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
@@ -93,7 +93,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43758 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55494 - "GET /health HTTP/1.1" 500 Internal Server Error
 [0;31m✗ Health endpoint failed[0m
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
@@ -112,7 +112,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43774 - "GET /oauth/authorize?client_id=demo_client&response_type=code&redirect_uri=http://localhost:8000/callback HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55496 - "GET /oauth/authorize?client_id=demo_client&response_type=code&redirect_uri=http://localhost:8000/callback HTTP/1.1" 500 Internal Server Error
 [0;31m✗ OAuth2 authorize endpoint failed[0m
 
 [0;34m=== SECURITY TESTS (10%) ===[0m
@@ -133,7 +133,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43782 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55506 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 [0;31m✗ SQL injection protection failed[0m
 Testing rate limiting...
 ERROR:    Exception in ASGI application
@@ -153,7 +153,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43796 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55508 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -171,7 +171,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43806 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55520 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -189,7 +189,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43822 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55528 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -207,7 +207,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43834 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55538 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -225,7 +225,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43842 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55544 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -243,7 +243,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43858 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55556 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -261,7 +261,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43868 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55566 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -279,7 +279,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43880 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55576 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -297,7 +297,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43882 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55586 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -315,7 +315,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43892 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55590 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -333,7 +333,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43894 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55594 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -351,7 +351,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43900 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55610 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -369,7 +369,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43914 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55622 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -387,7 +387,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43920 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55636 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -405,7 +405,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43930 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55652 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -423,7 +423,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43938 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55660 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -441,7 +441,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43954 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55676 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -459,7 +459,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43960 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55678 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -477,7 +477,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43966 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55684 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -495,7 +495,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43982 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55696 - "POST /auth/login HTTP/1.1" 500 Internal Server Error
 [0;31m✗ Rate limiting not working[0m
 Running security analysis...
 [0;32m✓ Security scan passed (1 issues)[0m
@@ -519,7 +519,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43992 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55708 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -537,7 +537,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:43994 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55724 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -555,7 +555,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44008 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55728 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -573,7 +573,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44010 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55734 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -591,7 +591,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44020 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55738 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -609,7 +609,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44024 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55740 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -627,7 +627,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44028 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55748 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -645,7 +645,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44030 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55754 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -663,7 +663,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44032 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55760 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -681,7 +681,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44034 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55768 - "GET /health HTTP/1.1" 500 Internal Server Error
 [0;32m✓ Response time acceptable (0ms avg)[0m
 Testing concurrent request handling...
 ERROR:    Exception in ASGI application
@@ -701,7 +701,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44038 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55786 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -719,7 +719,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44052 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55802 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -737,7 +737,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44064 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55808 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -755,7 +755,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44068 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55776 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -773,7 +773,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44084 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55800 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -791,7 +791,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44100 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55816 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -809,7 +809,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44114 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55826 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -827,7 +827,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44116 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55832 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -845,7 +845,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44128 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55848 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -863,7 +863,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44142 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55850 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -881,7 +881,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44152 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55856 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -899,7 +899,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44168 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55870 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -917,7 +917,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44180 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55884 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -935,7 +935,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44194 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55896 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -953,7 +953,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44198 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55898 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -971,7 +971,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44202 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55900 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -989,7 +989,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44206 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55910 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1007,7 +1007,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44218 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55924 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1025,7 +1025,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44224 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55926 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1043,7 +1043,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44236 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55934 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1061,7 +1061,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44238 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55946 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1079,7 +1079,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44242 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55950 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1097,7 +1097,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44252 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55954 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1115,7 +1115,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44260 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55966 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1133,7 +1133,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44276 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55980 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1151,7 +1151,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44282 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55990 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1169,7 +1169,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44298 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:55996 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1187,7 +1187,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44304 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56004 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1205,7 +1205,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44318 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56006 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1223,7 +1223,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44334 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56018 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1241,7 +1241,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44350 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56024 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1259,7 +1259,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44356 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56034 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1277,7 +1277,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44358 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56044 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1295,7 +1295,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44372 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56048 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1313,7 +1313,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44376 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56058 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1331,7 +1331,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44390 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56064 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1349,7 +1349,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44394 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56078 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1367,7 +1367,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44396 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56086 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1385,7 +1385,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44404 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56094 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1403,7 +1403,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44414 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56098 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1421,7 +1421,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44420 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56102 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1439,7 +1439,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44426 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56104 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1457,7 +1457,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44438 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56120 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1475,7 +1475,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44440 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56124 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1493,7 +1493,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44454 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56126 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1511,7 +1511,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44462 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56128 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1529,7 +1529,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44474 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56132 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1547,7 +1547,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44482 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56146 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1565,7 +1565,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44490 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56160 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1583,7 +1583,7 @@ Traceback (most recent call last):
     app = cls(app, *args, **kwargs)
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
-INFO:     127.0.0.1:44494 - "GET /health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:56168 - "GET /health HTTP/1.1" 500 Internal Server Error
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/workspaces/yaeger_benchmark/tasks/task2/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
@@ -1620,3 +1620,5 @@ Traceback (most recent call last):
           ^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: AuditLoggingMiddleware.__init__() got an unexpected keyword argument 'dispatch'
 INFO:     73.74.38.11:0 - "GET /favicon.ico HTTP/1.1" 500 Internal Server Error
+INFO:     Shutting down
+INFO:     Finished server process [5424]

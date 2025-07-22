@@ -59,8 +59,7 @@ oauth_clients_db: Dict[str, Any] = {}
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(RequestValidationMiddleware)
 app.add_middleware(RateLimitMiddleware)
-audit_middleware = AuditLoggingMiddleware(app)
-app.add_middleware(type(audit_middleware), dispatch=audit_middleware.dispatch)
+app.add_middleware(AuditLoggingMiddleware)
 
 # Add CORS middleware
 app.add_middleware(
