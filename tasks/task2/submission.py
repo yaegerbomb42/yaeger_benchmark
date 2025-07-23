@@ -17,7 +17,6 @@ Your implementation will be tested for:
 
 from fastapi import FastAPI, HTTPException, Depends, Request, Response, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional, List, Dict, Any
 import asyncio
 import secrets
@@ -31,9 +30,9 @@ from codebase.models import (
     APIKeyResponse, AuditLogResponse, User, UserRole, TokenType, MFAMethod
 )
 from codebase.token_manager import TokenManager, PasswordManager, MFAManager, SessionManager
-from codebase.security_middleware import (
-    RateLimitMiddleware, SecurityHeadersMiddleware, 
-    RequestValidationMiddleware, AuditLoggingMiddleware
+from codebase.security_middleware_new import (
+    RateLimitMiddleware, SecurityValidationMiddleware, 
+    AuditLoggingMiddleware, CSRFProtectionMiddleware, CORSMiddleware
 )
 
 # Initialize FastAPI app
@@ -55,13 +54,12 @@ users_db: Dict[str, User] = {}
 api_keys_db: Dict[str, Any] = {}
 oauth_clients_db: Dict[str, Any] = {}
 
-# Add security middleware - simplified to avoid compatibility issues
-# app.add_middleware(SecurityHeadersMiddleware)
-# app.add_middleware(RequestValidationMiddleware)
-# app.add_middleware(RateLimitMiddleware)
-# app.add_middleware(AuditLoggingMiddleware)
+# Add security middleware
+app.add_middleware(SecurityValidationMiddleware)
+app.add_middleware(RateLimitMiddleware)
+app.add_middleware(AuditLoggingMiddleware)
 
-# Add CORS middleware
+# Add CORS middleware  
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],  # Configure for your frontend
