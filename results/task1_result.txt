@@ -9,13 +9,13 @@ Testing basic execution...
 ✓ Algorithm executed successfully
 [0;32m✓ Algorithm executes without errors[0m
 Testing performance...
-[0;32m✓ Performance excellent (14.0ms)[0m
+[0;32m✓ Performance excellent (16.3ms)[0m
 Running security checks...
 [0;32m✓ Security: No issues found[0m
 
 [0;34m=== RESULTS SUMMARY ===[0m
 ========================================
-Runtime: 14.0ms
+Runtime: 16.3ms
 Memory: N/A (fast mode)
 Vulns: 0
 
