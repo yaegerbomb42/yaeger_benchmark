@@ -24,7 +24,7 @@ security_logger.addHandler(handler)
 class RateLimitMiddleware(BaseHTTPMiddleware):
     """Advanced rate limiting middleware with sliding window and adaptive limits."""
     
-    def __init__(self, app, config: RateLimitConfig = None):
+    def __init__(self, app, config: RateLimitConfig = None, **kwargs):
         super().__init__(app)
         self.config = config or RateLimitConfig()
         
@@ -284,7 +284,7 @@ class RequestValidationMiddleware(BaseHTTPMiddleware):
 class AuditLoggingMiddleware(BaseHTTPMiddleware):
     """Comprehensive audit logging for security events."""
     
-    def __init__(self, app):
+    def __init__(self, app, **kwargs):
         super().__init__(app)
         self.audit_logs: list = []
     

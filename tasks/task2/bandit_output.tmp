@@ -3,21 +3,21 @@
 [main]	INFO	cli include tests: None
 [main]	INFO	cli exclude tests: None
 [main]	INFO	running on Python 3.12.1
-Run started:2025-07-22 21:36:56.027100
+Run started:2025-07-22 21:48:44.167338
 
 Test results:
 >> Issue: [B104:hardcoded_bind_all_interfaces] Possible binding to all interfaces.
    Severity: Medium   Confidence: Medium
    CWE: CWE-605 (https://cwe.mitre.org/data/definitions/605.html)
    More Info: https://bandit.readthedocs.io/en/1.8.6/plugins/b104_hardcoded_bind_all_interfaces.html
-   Location: ./submission.py:426:26
-425	    import uvicorn
-426	    uvicorn.run(app, host="0.0.0.0", port=8000)
+   Location: ./submission.py:425:26
+424	    import uvicorn
+425	    uvicorn.run(app, host="0.0.0.0", port=8000)
 
 --------------------------------------------------
 
 Code scanned:
-	Total lines of code: 217
+	Total lines of code: 212
 	Total lines skipped (#nosec): 0
 	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
 
