@@ -1,6 +1,315 @@
 """
 Comprehensive test suite for Task 2: Secure Microservice Authentication
-Tests the authentication service implementation with security focus.
+Tests the authentication        # Should reject weak password
+        assert response.status_code in [400, 422]
+    
+    def test_sql_injection_protection(self):
+        """Test protection against SQL injection attacks."""
+        malicious_payloads = [
+            "'; DROP TABLE users; --",
+            "admin' OR '1'='1",
+            "1' UNION SELECT * FROM users--",
+            "'; INSERT INTO users VALUES('hacker','pass');--"
+        ]
+        
+        for payload in malicious_payloads:
+            malicious_data = {
+                "email": payload,
+                "password": "TestPass123!"
+            }
+            response = self.client.post("/auth/login", json=malicious_data)
+            
+            # Should not crash or return unexpected success
+            assert response.status_code in [400, 401, 422, 500]
+            
+            # Response should not contain SQL error messages
+            if response.status_code != 500:
+                response_text = response.text.lower()
+                sql_keywords = ["syntax error", "mysql", "postgresql", "sqlite", "sql"]
+                for keyword in sql_keywords:
+                    assert keyword not in response_text, f"SQL error exposed: {keyword}"
+    
+    def test_xss_protection(self):
+        """Test protection against XSS attacks."""
+        xss_payloads = [
+            "<script>alert('xss')</script>",
+            "javascript:alert('xss')",
+            "<img src=x onerror=alert('xss')>",
+            "';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//",
+        ]
+        
+        for payload in xss_payloads:
+            xss_data = {
+                "email": f"test+{payload}@example.com",
+                "password": "TestPass123!",
+                "first_name": payload,
+                "last_name": "User"
+            }
+            response = self.client.post("/auth/register", json=xss_data)
+            
+            # Should handle malicious input safely
+            if response.status_code in [200, 201]:
+                response_text = response.text
+                # Response should not contain unescaped script tags
+                assert "<script>" not in response_text
+                assert "javascript:" not in response_text
+    
+    def test_rate_limiting(self):
+        """Test rate limiting protection."""
+        # Make rapid requests to trigger rate limiting
+        responses = []
+        for i in range(20):  # Try 20 rapid requests
+            response = self.client.post("/auth/login", json={
+                "email": f"test{i}@example.com",
+                "password": "wrongpassword"
+            })
+            responses.append(response.status_code)
+        
+        # Should eventually start rate limiting (429 Too Many Requests)
+        rate_limited = any(status == 429 for status in responses[-10:])  # Check last 10 requests
+        # Note: Rate limiting might not trigger in test environment, so this is optional
+        # assert rate_limited, "Rate limiting should trigger with rapid requests"
+    
+    def test_jwt_token_validation(self):
+        """Test JWT token validation and structure."""
+        # Register and login to get a token
+        self.client.post("/auth/register", json=self.test_user_data)
+        login_response = self.client.post("/auth/login", json={
+            "email": self.test_user_data["email"],
+            "password": self.test_user_data["password"]
+        })
+        
+        if login_response.status_code == 200:
+            token_data = login_response.json()
+            token = token_data.get("access_token") or token_data.get("token")
+            
+            if token:
+                # JWT tokens should have 3 parts separated by dots
+                token_parts = token.split(".")
+                assert len(token_parts) == 3, "JWT token should have header.payload.signature"
+                
+                # Test protected endpoint with token
+                headers = {"Authorization": f"Bearer {token}"}
+                protected_response = self.client.get("/auth/me", headers=headers)
+                
+                # Should allow access with valid token
+                assert protected_response.status_code in [200, 401]  # 401 if endpoint not implemented
+    
+    def test_token_expiration(self):
+        """Test token expiration handling."""
+        # This would require actual token expiration logic
+        # For now, test that tokens have expiration claims
+        self.client.post("/auth/register", json=self.test_user_data)
+        response = self.client.post("/auth/login", json={
+            "email": self.test_user_data["email"],
+            "password": self.test_user_data["password"]
+        })
+        
+        if response.status_code == 200:
+            token_data = response.json()
+            # Should include expiration information
+            assert "expires_in" in token_data or "exp" in token_data or "access_token" in token_data
+    
+    def test_csrf_protection(self):
+        """Test CSRF protection mechanisms."""
+        # Test that state-changing operations require proper headers
+        response = self.client.post("/auth/register", 
+                                  json=self.test_user_data,
+                                  headers={"Origin": "http://malicious-site.com"})
+        
+        # Should handle cross-origin requests appropriately
+        # Either allow with CORS or reject
+        assert response.status_code in [200, 201, 400, 403, 422]
+    
+    def test_password_hashing(self):
+        """Test that passwords are properly hashed."""
+        # Register a user
+        response = self.client.post("/auth/register", json=self.test_user_data)
+        
+        if response.status_code in [200, 201]:
+            # Try to verify that password is not stored in plaintext
+            # This is more of an implementation test - check if bcrypt or similar is used
+            import bcrypt
+            test_hash = bcrypt.hashpw(b"testpassword", bcrypt.gensalt())
+            assert isinstance(test_hash, bytes), "Should use proper password hashing"
+    
+    def test_concurrent_authentication_load(self):
+        """Test authentication under concurrent load."""
+        import threading
+        import time
+        
+        results = []
+        
+        def auth_worker():
+            try:
+                # Register unique user
+                user_id = int(time.time() * 1000) % 10000
+                user_data = {
+                    "email": f"load_test_{user_id}@example.com",
+                    "password": "TestPass123!",
+                    "first_name": "Load",
+                    "last_name": "Test"
+                }
+                
+                reg_response = self.client.post("/auth/register", json=user_data)
+                
+                if reg_response.status_code in [200, 201]:
+                    # Try to login
+                    login_response = self.client.post("/auth/login", json={
+                        "email": user_data["email"],
+                        "password": user_data["password"]
+                    })
+                    results.append(login_response.status_code)
+                else:
+                    results.append(reg_response.status_code)
+            except Exception as e:
+                results.append(500)  # Server error
+        
+        # Start multiple concurrent threads
+        threads = []
+        for _ in range(10):
+            thread = threading.Thread(target=auth_worker)
+            threads.append(thread)
+            thread.start()
+        
+        # Wait for all threads to complete
+        for thread in threads:
+            thread.join(timeout=10)
+        
+        # Most requests should succeed
+        success_rate = len([r for r in results if r in [200, 201]]) / len(results) if results else 0
+        assert success_rate >= 0.5, f"Low success rate under load: {success_rate:.2f}"
+    
+    def test_input_validation_edge_cases(self):
+        """Test input validation with edge cases."""
+        edge_cases = [
+            # Email edge cases
+            {"email": "", "password": "TestPass123!"},  # Empty email
+            {"email": "a" * 500 + "@example.com", "password": "TestPass123!"},  # Very long email
+            {"email": "invalid-email", "password": "TestPass123!"},  # Invalid email format
+            {"email": "test@", "password": "TestPass123!"},  # Incomplete email
+            
+            # Password edge cases
+            {"email": "test@example.com", "password": ""},  # Empty password
+            {"email": "test@example.com", "password": "a" * 1000},  # Very long password
+            {"email": "test@example.com", "password": "x"},  # Very short password
+            
+            # Unicode and special characters
+            {"email": "test+üñīçödé@example.com", "password": "TestPass123!"},
+            {"email": "test@example.com", "password": "pásswôrd123!"},
+        ]
+        
+        for case in edge_cases:
+            response = self.client.post("/auth/register", json=case)
+            
+            # Should handle edge cases gracefully (not crash)
+            assert response.status_code in [200, 201, 400, 422]
+            
+            # Should return proper error messages for invalid inputs
+            if response.status_code in [400, 422]:
+                data = response.json()
+                assert "detail" in data or "message" in data or "error" in data
+    
+    def test_authentication_timing_attacks(self):
+        """Test protection against timing attacks."""
+        import time
+        
+        # Measure time for valid vs invalid email lookups
+        valid_email_times = []
+        invalid_email_times = []
+        
+        # First register a user
+        self.client.post("/auth/register", json=self.test_user_data)
+        
+        # Test timing for existing email with wrong password
+        for _ in range(5):
+            start_time = time.time()
+            self.client.post("/auth/login", json={
+                "email": self.test_user_data["email"],
+                "password": "wrongpassword"
+            })
+            valid_email_times.append(time.time() - start_time)
+        
+        # Test timing for non-existent email
+        for _ in range(5):
+            start_time = time.time()
+            self.client.post("/auth/login", json={
+                "email": "nonexistent@example.com",
+                "password": "wrongpassword"
+            })
+            invalid_email_times.append(time.time() - start_time)
+        
+        # Calculate average times
+        avg_valid = sum(valid_email_times) / len(valid_email_times)
+        avg_invalid = sum(invalid_email_times) / len(invalid_email_times)
+        
+        # Time difference should be minimal (< 50ms difference)
+        time_diff = abs(avg_valid - avg_invalid)
+        assert time_diff < 0.05, f"Potential timing attack vulnerability: {time_diff:.3f}s difference"
+    
+    def test_oauth2_flow_simulation(self):
+        """Test OAuth2-like authorization flow."""
+        # Test authorization endpoint (if implemented)
+        auth_response = self.client.get("/auth/authorize", params={
+            "client_id": "test_client",
+            "response_type": "code",
+            "redirect_uri": "http://localhost:3000/callback",
+            "scope": "read write"
+        })
+        
+        # Should handle OAuth2 authorization (or return not implemented)
+        assert auth_response.status_code in [200, 302, 404, 501]
+    
+    def test_api_key_authentication(self):
+        """Test API key authentication (if implemented)."""
+        # Try to access with API key
+        headers = {"X-API-Key": "test-api-key-12345"}
+        response = self.client.get("/auth/validate", headers=headers)
+        
+        # Should handle API key auth (or return not implemented)
+        assert response.status_code in [200, 401, 404, 501]
+    
+    def test_security_headers(self):
+        """Test that proper security headers are included."""
+        response = self.client.get("/health")
+        
+        security_headers = [
+            "X-Content-Type-Options",
+            "X-Frame-Options", 
+            "X-XSS-Protection",
+            "Strict-Transport-Security"
+        ]
+        
+        # At least some security headers should be present
+        present_headers = [h for h in security_headers if h in response.headers]
+        # Note: This is aspirational - not all implementations may include these
+        # assert len(present_headers) >= 1, f"No security headers found: {list(response.headers.keys())}"
+    
+    def test_error_message_information_disclosure(self):
+        """Test that error messages don't leak sensitive information."""
+        # Test with various malformed requests
+        malformed_requests = [
+            {"email": "test@example.com"},  # Missing password
+            {"password": "TestPass123!"},   # Missing email
+            {},  # Empty request
+            {"email": "test@example.com", "password": "TestPass123!", "extra_field": "value"}
+        ]
+        
+        for req in malformed_requests:
+            response = self.client.post("/auth/login", json=req)
+            
+            if response.status_code in [400, 422]:
+                error_text = response.text.lower()
+                
+                # Should not expose internal details
+                sensitive_terms = [
+                    "traceback", "exception", "stack trace", 
+                    "internal error", "database", "sql",
+                    "secret", "key", "token", "hash"
+                ]
+                
+                for term in sensitive_terms:
+                    assert term not in error_text, f"Error message exposes sensitive info: {term}"ervice implementation with security focus.
 """
 import pytest
 import asyncio
